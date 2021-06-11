@@ -87,12 +87,13 @@
 		</view>
 		<u-toast ref="uToast" />
 		<u-keyboard ref="uKeyboard" :mode="keyboardMode" v-model="keyboardShow" @change="valChange" @backspace="backspace" :mask="false" :dot-enabled="false" @confirm="confirmInput" :cancel-btn="false" :safe-area-inset-bottom="true"></u-keyboard>
-		<u-modal v-model="show" :content="content" @confirm="confirm" @cancel='cancel' :show-cancel-button="true"></u-modal>
+		<u-modal v-model="show" :content="content" @confirm="goSign" @cancel='cancel' :show-cancel-button="true"></u-modal>
 	</view>
 </template>
 
 <script>
 	import { today, period } from '../../utils'
+	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR } from '../../common'
 	export default {
 		data() {
 			return {
@@ -108,35 +109,8 @@
 				show: false,
 				content: '本人郑重承诺以上内容属实',
 				border: true,
-				info: {
-					name: '',
-					employers: '',
-					mobile: '',
-					gender: '',
-					homeland: '',
-					workerAddress: '',
-					idNumber: '',
-					emergency: '',
-					emergencyCall: '',
-					bankName: '',
-					bankNumber: '',
-					tryTime: '',
-					startTime: '',
-					work: '',
-					endTime: '',
-					shop: '',
-					salary: ''
-				},
-				genderList: [
-					{
-						value: 'gender',
-						label: '男'
-					},
-					{
-						value: 'gender',
-						label: '女'
-					}
-				],
+				info: SIGN_INFO,
+				genderList: GENDER_LIST,
 				tryTimeList: [],
 			};
 		},
@@ -145,9 +119,6 @@
 			this.initDate()
 		},
 		methods: {
-			confirm() {
-				this.goSign()
-			},
 			initTry() {
 				this.tryTimeList = period()
 			},
@@ -155,19 +126,14 @@
 				this.today = today()
 			},
 			submit() {
-				let count = 0
-				for (const key in this.info) {
-					if (this.info.hasOwnProperty(key)) {
-						const element = this.info[key];
-						if (!element) {
-							count += 1
-						}
-					}
-				}
-				if (count !== 0) {
-					this.showToast()
-					return
-				}
+				// for (const key in this.info) {
+				// 	if (this.info.hasOwnProperty(key)) {
+				// 		if (!this.info[key]) {
+				// 			this.showToast()
+				// 			return
+				// 		}
+				// 	}
+				// }
 				this.show = true
 			},
 			cancel() {
@@ -175,19 +141,23 @@
 			},
 			signature(data) {
 				uni.request({
-					url: 'https://www.zhinimei.cn/workSign',
+					url: '/api/workSign',
 					method: 'POST',
 					data,
 					success: (res) => {
-						console.log(res?.data);
-						window.location.href = res?.data?.signUrl
+						if (res?.data?.signUrl) window.location.href = res.data.signUrl
+						else if (!res?.data?.code) {
+							this.$refs.uToast.show({
+								title: '信息填写有误',
+								type: 'error',
+							})
+						}
 						uni.hideLoading();
 					},
-					fail: (res) => {
+					fail: () => {
 						uni.hideLoading();
-						console.log(res)
 						this.$refs.uToast.show({
-							title: res,
+							title: '请求失败',
 							type: 'error',
 						})
 					}
@@ -197,21 +167,10 @@
 				uni.showLoading({
 					title: '加载中'
 				});
-				const data = {};
-				const info = this.info
-				for (const key in info) {
-					if (Object.hasOwnProperty.call(info, key)) {
-						const element = info[key];
-						data[key] = element
-					}
-				}
-				this.signature(data)
+				this.signature(this.info)
 			},
 			showToast() {
-				this.$refs.uToast.show({
-					title: '请填写完整',
-					type: 'error',
-				})
+				this.$refs.uToast.show(INPUT_ERROR)
 			},
 			chooseAddress() {
 				uni.chooseLocation({
@@ -264,19 +223,13 @@
 			},
 			isPhone(event) {
 				if (!this.$u.test.mobile(this.info[event])) {
-					this.$refs.uToast.show({
-						title: '手机号格式错误',
-						type: 'error',
-					})
+					this.$refs.uToast.show(PHONE_ERROR)
 					this.info[event] = ''
 				}
 			},
 			isIdCard(event) {
 				if (!this.$u.test.idCard(this.info[event])) {
-					this.$refs.uToast.show({
-						title: '身份证号格式错误',
-						type: 'error',
-					})
+					this.$refs.uToast.show(CARD_ERROR)
 					this.info[event] = ''
 				}
 			}
