@@ -92,6 +92,7 @@
 </template>
 
 <script>
+	import { today, period } from '../../utils'
 	export default {
 		data() {
 			return {
@@ -148,16 +149,10 @@
 				this.goSign()
 			},
 			initTry() {
-				for (let index = 1; index <= 12; index++) {
-					this.tryTimeList.push({
-						value: 'tryTime',
-						label: `${index}个月`
-					})
-				}
+				this.tryTimeList = period()
 			},
 			initDate() {
-				const date = new Date()
-				this.today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+				this.today = today()
 			},
 			submit() {
 				let count = 0
@@ -178,18 +173,7 @@
 			cancel() {
 				this.show = false
 			},
-			goSign() {
-				uni.showLoading({
-					title: '加载中'
-				});
-				const data = {};
-				const info = this.info
-				for (const key in info) {
-					if (Object.hasOwnProperty.call(info, key)) {
-						const element = info[key];
-						data[key] = element
-					}
-				}
+			signature(data) {
 				uni.request({
 					url: 'https://www.zhinimei.cn/workSign',
 					method: 'POST',
@@ -208,6 +192,20 @@
 						})
 					}
 				});
+			},
+			goSign() {
+				uni.showLoading({
+					title: '加载中'
+				});
+				const data = {};
+				const info = this.info
+				for (const key in info) {
+					if (Object.hasOwnProperty.call(info, key)) {
+						const element = info[key];
+						data[key] = element
+					}
+				}
+				this.signature(data)
 			},
 			showToast() {
 				this.$refs.uToast.show({
