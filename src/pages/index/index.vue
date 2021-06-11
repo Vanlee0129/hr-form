@@ -148,7 +148,7 @@
 						if (res?.data?.signUrl) window.location.href = res.data.signUrl
 						else if (!res?.data?.code) {
 							this.$refs.uToast.show({
-								title: '信息填写有误',
+								title: '系统错误',
 								type: 'error',
 							})
 						}
