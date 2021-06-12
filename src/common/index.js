@@ -13,6 +13,16 @@ export const INPUT_ERROR = {
 	type: "error",
 };
 
+export const REQUEST_ERROR = {
+	title: "请求失败",
+	type: "error",
+};
+
+export const SYSTEM_ERROR = {
+	title: "系统错误",
+	type: "error",
+};
+
 export const SIGN_INFO = {
 	name: "",
 	employers: "",
