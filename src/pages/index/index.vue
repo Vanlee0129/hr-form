@@ -92,7 +92,7 @@
 </template>
 
 <script>
-	import { today, period } from '../../utils'
+	import { today, period, isEmpty } from '../../utils'
 	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR } from '../../common'
 	export default {
 		data() {
@@ -104,35 +104,21 @@
 				keyboardShow: false,
 				keyboardMode: 'number',
 				currentChoose: '',
-				today: '',
+				today: today(),
 				readOnly: true,
 				show: false,
 				content: '本人郑重承诺以上内容属实',
 				border: true,
 				info: SIGN_INFO,
 				genderList: GENDER_LIST,
-				tryTimeList: [],
+				tryTimeList: period(),
 			};
 		},
-		mounted() {
-			this.initTry()
-			this.initDate()
-		},
 		methods: {
-			initTry() {
-				this.tryTimeList = period()
-			},
-			initDate() {
-				this.today = today()
-			},
 			submit() {
-				for (const key in this.info) {
-					if (this.info.hasOwnProperty(key)) {
-						if (!this.info[key]) {
-							this.showToast()
-							return
-						}
-					}
+				if (isEmpty(this.info)) {
+					this.showToast()
+					return
 				}
 				this.show = true
 			},
@@ -164,9 +150,7 @@
 				});
 			},
 			goSign() {
-				uni.showLoading({
-					title: '加载中'
-				});
+				uni.showLoading()
 				this.signature(this.info)
 			},
 			showToast() {

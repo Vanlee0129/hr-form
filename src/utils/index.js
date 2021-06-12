@@ -13,3 +13,12 @@ export const period = () => {
 	}
 	return period;
 };
+
+export const isEmpty = (obj) => {
+	for (const key in obj) {
+		if (obj.hasOwnProperty(key)) {
+			if (!obj[key]) return true;
+		}
+	}
+	return false;
+};
