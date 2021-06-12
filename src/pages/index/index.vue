@@ -126,14 +126,14 @@
 				this.today = today()
 			},
 			submit() {
-				// for (const key in this.info) {
-				// 	if (this.info.hasOwnProperty(key)) {
-				// 		if (!this.info[key]) {
-				// 			this.showToast()
-				// 			return
-				// 		}
-				// 	}
-				// }
+				for (const key in this.info) {
+					if (this.info.hasOwnProperty(key)) {
+						if (!this.info[key]) {
+							this.showToast()
+							return
+						}
+					}
+				}
 				this.show = true
 			},
 			cancel() {
