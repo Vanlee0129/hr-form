@@ -127,7 +127,7 @@
 			},
 			signature(data) {
 				uni.request({
-					url: '/workSign',
+					url: 'https://www.zhinimei.cn/workSign',
 					method: 'POST',
 					data,
 					success: (res) => {

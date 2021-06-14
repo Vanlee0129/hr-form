@@ -68,19 +68,6 @@
 	"h5": {
 		"router": {
 			"mode": "history"
-		},
-		"devServer": {
-			"https": false,
-			"proxy": {
-				"/": {
-					"target": "https://www.zhinimei.cn",
-					"changeOrigin": true,
-					"secure": false,
-					"pathRewrite": {
-						"^/": "/"
-					}
-				}
-			}
 		}
 	}
 }
