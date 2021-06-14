@@ -127,7 +127,7 @@
 			},
 			signature(data) {
 				uni.request({
-					url: '/api/workSign',
+					url: '/workSign',
 					method: 'POST',
 					data,
 					success: (res) => {

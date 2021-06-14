@@ -72,12 +72,12 @@
 		"devServer": {
 			"https": false,
 			"proxy": {
-				"/api": {
+				"/": {
 					"target": "https://www.zhinimei.cn",
 					"changeOrigin": true,
 					"secure": false,
 					"pathRewrite": {
-						"^/api": "/"
+						"^/": "/"
 					}
 				}
 			}
