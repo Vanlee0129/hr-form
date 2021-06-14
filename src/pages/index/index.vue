@@ -93,7 +93,7 @@
 
 <script>
 	import { today, period, isEmpty } from '../../utils'
-	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR } from '../../common'
+	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR } from '../../common'
 	export default {
 		data() {
 			return {
@@ -127,25 +127,19 @@
 			},
 			signature(data) {
 				uni.request({
-					url: '/api/workSign',
+					url: 'https://www.zhinimei.cn/workSign',
 					method: 'POST',
 					data,
 					success: (res) => {
 						if (res?.data?.signUrl) window.location.href = res.data.signUrl
 						else if (!res?.data?.code) {
-							this.$refs.uToast.show({
-								title: '系统错误',
-								type: 'error',
-							})
+							this.$refs.uToast.show(SYSTEM_ERROR)
 						}
 						uni.hideLoading();
 					},
 					fail: () => {
 						uni.hideLoading();
-						this.$refs.uToast.show({
-							title: '请求失败',
-							type: 'error',
-						})
+						this.$refs.uToast.show(REQUEST_ERROR)
 					}
 				});
 			},
@@ -185,11 +179,7 @@
 			openKeyboard(event) {
 				this.keyboardShow = true
 				this.currentChoose = event
-				if (event === 'idNumber') {
-					this.keyboardMode = "card"
-					return
-				}
-				this.keyboardMode = "number"
+				this.keyboard = event === 'idNumber' ? 'card' : 'number'
 			},
 			// 按键被点击(点击退格键不会触发此事件)
 			valChange(val) {
