@@ -14,11 +14,17 @@ export const period = () => {
 	return period;
 };
 
+export const isObject = (obj) => {
+    return Object.prototype.toString.call(obj) === '[object Object]'
+}
+
 export const isEmpty = (obj) => {
-	for (const key in obj) {
-		if (obj.hasOwnProperty(key)) {
-			if (!obj[key]) return true;
-		}
-	}
-	return false;
+    if (isObject(obj)) {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (!obj[key]) return true;
+            }
+        }
+        return false;
+    }
 };
