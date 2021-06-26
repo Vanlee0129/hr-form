@@ -71,11 +71,11 @@
 			</view>
 			<view class="input-item">
 				<text>从事岗位</text>
-				<u-input :border="border" v-model="info.work" placeholder="请输入从事岗位" maxlength="4"></u-input>
+				<u-input :border="border" v-model="info.work" placeholder="请输入从事岗位" maxlength="8"></u-input>
 			</view>
 			<view class="input-item">
 				<text>服务门店</text>
-				<u-input :border="border" v-model="info.shop" placeholder="请输入服务门店" maxlength="6"></u-input>
+				<u-input :border="border" v-model="info.shop" placeholder="请输入服务门店" maxlength="8"></u-input>
 			</view>
 			<view class="input-item">
 				<text>综合工资</text>
@@ -179,7 +179,7 @@
 			openKeyboard(event) {
 				this.keyboardShow = true
 				this.currentChoose = event
-				this.keyboard = event === 'idNumber' ? 'card' : 'number'
+				this.keyboardMode = event === 'idNumber' ? 'card' : 'number'
 			},
 			// 按键被点击(点击退格键不会触发此事件)
 			valChange(val) {
