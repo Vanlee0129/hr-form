@@ -179,7 +179,7 @@
 			openKeyboard(event) {
 				this.keyboardShow = true
 				this.currentChoose = event
-				this.keyboard = event === 'idNumber' ? 'card' : 'number'
+				this.keyboardMode = event === 'idNumber' ? 'card' : 'number'
 			},
 			// 按键被点击(点击退格键不会触发此事件)
 			valChange(val) {
