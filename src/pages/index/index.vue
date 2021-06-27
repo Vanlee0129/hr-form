@@ -62,12 +62,12 @@
 			<view class="input-item">
 				<text>入职日期</text>
 				<u-input :border="border" v-model="info.startTime" placeholder="请输入职日期" @click="showChoose('startTime')" type="select" class="select-input"></u-input>
-				<u-calendar v-model="startTimeShow" mode="date" @change="confirmDate" safe-area-inset-bottom max-date="2100-01-01" :min-date="today"></u-calendar>
+				<u-calendar v-model="startTimeShow" mode="date" @change="confirmDate" safe-area-inset-bottom max-date="2100-01-01"></u-calendar>
 			</view>
 			<view class="input-item">
 				<text>到期日期</text>
 				<u-input :border="border" v-model="info.endTime" placeholder="请输入合同到期日期" @click="showChoose('endTime')" type="select" class="select-input"></u-input>
-				<u-calendar v-model="endTimeShow" mode="date" @change="confirmDate" safe-area-inset-bottom max-date="2100-01-01" :min-date="today"></u-calendar>
+				<u-calendar v-model="endTimeShow" mode="date" @change="confirmDate" safe-area-inset-bottom max-date="2100-01-01"></u-calendar>
 			</view>
 			<view class="input-item">
 				<text>从事岗位</text>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-	import { today, period, isEmpty } from '../../utils'
+	import { period, isEmpty } from '../../utils'
 	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR } from '../../common'
 	export default {
 		data() {
@@ -104,7 +104,6 @@
 				keyboardShow: false,
 				keyboardMode: 'number',
 				currentChoose: '',
-				today: today(),
 				readOnly: true,
 				show: false,
 				content: '本人郑重承诺以上内容属实',
