@@ -19,7 +19,7 @@ export const payday = () => {
 	for (let index = 1; index <= 31; index++) {
 		period.push({
 			value: "payDay",
-			label: `${index}号`,
+			label: `${index}`,
 		})
 	}
 	return period
