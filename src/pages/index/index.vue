@@ -81,6 +81,11 @@
 				<text>综合工资</text>
 				<u-input :border="border" v-model="info.salary" placeholder="请输入综合薪资" type="number"></u-input>
 			</view>
+			<view class="input-item">
+				<text>发薪日期</text>
+				<u-input :border="border" v-model="info.payDay" placeholder="请输入发薪日期" @click="showChoose('payDay')" type="select" class="select-input"></u-input>
+				<u-select v-model="payDayShow" :list="payDayList" @confirm="confirmChoose"></u-select>
+			</view>
 		</view>
 		<view class="footer">
 			<u-button class="custom-style" type="success" @click="submit">提交</u-button>
@@ -92,7 +97,7 @@
 </template>
 
 <script>
-	import { period, isEmpty } from '../../utils'
+	import { period, isEmpty, payday } from '../../utils'
 	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR } from '../../common'
 	export default {
 		data() {
@@ -102,6 +107,7 @@
 				startTimeShow: false,
 				endTimeShow: false,
 				keyboardShow: false,
+				payDayShow: false,
 				keyboardMode: 'number',
 				currentChoose: '',
 				readOnly: true,
@@ -111,6 +117,7 @@
 				info: SIGN_INFO,
 				genderList: GENDER_LIST,
 				tryTimeList: period(),
+				payDayList: payday(),
 			};
 		},
 		methods: {

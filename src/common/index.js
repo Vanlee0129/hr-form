@@ -41,6 +41,7 @@ export const SIGN_INFO = {
 	endTime: "",
 	shop: "",
 	salary: "",
+	payDay: "",
 }
 
 export const GENDER_LIST = [
