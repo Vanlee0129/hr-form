@@ -1,9 +1,9 @@
-export const today = () => {
+export function today() {
 	const date = new Date()
 	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 }
 
-export const period = () => {
+export function period() {
 	const period = []
 	for (let index = 1; index <= 12; index++) {
 		period.push({
@@ -14,7 +14,7 @@ export const period = () => {
 	return period
 }
 
-export const payday = () => {
+export function payday() {
 	const period = []
 	for (let index = 1; index <= 31; index++) {
 		period.push({
@@ -25,11 +25,11 @@ export const payday = () => {
 	return period
 }
 
-export const isObject = (obj) => {
+export function isObject(obj) {
 	return Object.prototype.toString.call(obj) === "[object Object]"
 }
 
-export const isEmpty = (obj) => {
+export function isEmpty(obj) {
 	if (isObject(obj)) {
 		for (const key in obj) {
 			if (obj.hasOwnProperty(key)) {
