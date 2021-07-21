@@ -54,3 +54,5 @@ export const GENDER_LIST = [
 		label: "女",
 	},
 ]
+
+export const BASE_URL = "https://www.zhinimei.cn/workSign"

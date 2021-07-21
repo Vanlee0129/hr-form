@@ -98,7 +98,7 @@
 
 <script>
 	import { period, isEmpty, payday } from '../../utils'
-	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR } from '../../common'
+	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR, BASE_URL } from '../../common'
 	export default {
 		data() {
 			return {
@@ -133,7 +133,7 @@
 			},
 			signature(data) {
 				uni.request({
-					url: 'https://www.zhinimei.cn/workSign',
+					url: BASE_URL,
 					method: 'POST',
 					data,
 					success: (res) => {
