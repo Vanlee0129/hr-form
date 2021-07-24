@@ -1,12 +1,12 @@
 <script>
 	export default {
-		onLaunch: function() {
+		onLaunch: function () {
 			console.log('App Launch')
 		},
-		onShow: function() {
+		onShow: function () {
 			console.log('App Show')
 		},
-		onHide: function() {
+		onHide: function () {
 			console.log('App Hide')
 		}
 	}
@@ -14,5 +14,5 @@
 
 <style lang="scss">
 	/*每个页面公共css */
-	@import "uview-ui/index.scss";
+	@import 'uview-ui/index.scss';
 </style>

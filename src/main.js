@@ -1,21 +1,15 @@
-import Vue from "vue";
-import App from "./App";
-import uView from "uview-ui";
-import store from "@/store";
+import Vue from 'vue'
+import App from './App'
+import uView from 'uview-ui'
 
-const vuexStore = require("@/store/$u.mixin.js");
+Vue.use(uView)
 
-Vue.mixin(vuexStore);
+Vue.config.productionTip = false
 
-Vue.use(uView);
-
-Vue.config.productionTip = false;
-
-App.mpType = "app";
+App.mpType = 'app'
 
 const app = new Vue({
-	store,
 	...App,
-});
+})
 
-app.$mount();
+app.$mount()
