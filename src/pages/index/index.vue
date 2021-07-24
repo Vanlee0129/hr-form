@@ -1,52 +1,52 @@
 <template>
-	<view class="container">
+	<view class="container u-skeleton">
 		<view class="logo">
-			<image src="/static/logo.png" mode="aspectFit"></image>
+			<image src="/static/logo.png" mode="aspectFit" class="u-skeleton-rect"></image>
 		</view>
 		<view class="main">
 			<view class="input-item">
-				<text>服务企业</text>
+				<text class="u-skeleton-rect">服务企业</text>
 				<u-input placeholder="请输入服务企业" :border="border" v-model="info.employers"></u-input>
 			</view>
 			<view class="input-item">
-				<text>姓名</text>
+				<text class="u-skeleton-rect">姓名</text>
 				<u-input placeholder="请输入真实姓名" :border="border" v-model="info.name"></u-input>
 			</view>
 			<view class="input-item">
-				<text>性别</text>
+				<text class="u-skeleton-rect">性别</text>
 				<u-input :border="border" v-model="info.gender" placeholder="请输入性别" @click="showChoose('gender')" type="select" class="select-input"></u-input>
 				<u-select v-model="genderShow" :list="genderList" @confirm="confirmChoose"></u-select>
 			</view>
 			<view class="input-item">
-				<text>籍贯</text>
+				<text class="u-skeleton-rect">籍贯</text>
 				<u-input :border="border" v-model="info.homeland" placeholder="请输入籍贯 如四川成都"></u-input>
 			</view>
 			<view class="input-item">
-				<text>手机号码</text>
+				<text class="u-skeleton-rect">手机号码</text>
 				<u-input :border="border" v-model="info.mobile" placeholder="请输入手机号码" disabled maxlength="11"></u-input>
 				<view @click="openKeyboard('mobile')" class="input-mask"></view>
 			</view>
 			<view class="input-item">
-				<text>身份证号码</text>
+				<text class="u-skeleton-rect">身份证号码</text>
 				<u-input :border="border" v-model="info.idNumber" placeholder="请输入身份证号码" disabled maxlength="18"></u-input>
 				<view @click="openKeyboard('idNumber')" class="input-mask"></view>
 			</view>
 			<view class="input-item">
-				<text>现住地址</text>
+				<text class="u-skeleton-rect">现住地址</text>
 				<u-input :border="border" v-model="info.workerAddress" placeholder="请输入现住地址" disabled></u-input>
 				<view @click="chooseAddress" class="input-mask"></view>
 			</view>
 			<view class="input-item">
-				<text>紧急联系人</text>
+				<text class="u-skeleton-rect">紧急联系人</text>
 				<u-input :border="border" v-model="info.emergency" placeholder="请输入紧急联系人"></u-input>
 			</view>
 			<view class="input-item">
-				<text>紧急联系人电话</text>
+				<text class="u-skeleton-rect">紧急联系人电话</text>
 				<u-input :border="border" v-model="info.emergencyCall" placeholder="请输入紧急联系人电话" disabled maxlength="11"></u-input>
 				<view @click="openKeyboard('emergencyCall')" class="input-mask"></view>
 			</view>
 			<view class="input-item">
-				<text>银行卡开户行</text>
+				<text class="u-skeleton-rect">银行卡开户行</text>
 				<u-input :border="border" v-model="info.bankName" placeholder="请输入开户行"></u-input>
 			</view>
 			<view class="input-item">
@@ -93,6 +93,7 @@
 		<u-toast ref="uToast" />
 		<u-keyboard ref="uKeyboard" :mode="keyboardMode" v-model="keyboardShow" @change="valChange" @backspace="backspace" :mask="false" :dot-enabled="false" @confirm="confirmInput" :cancel-btn="false" :safe-area-inset-bottom="true"></u-keyboard>
 		<u-modal v-model="show" content="本人郑重承诺以上内容属实" @confirm="goSign" @cancel='show = false' :show-cancel-button="true"></u-modal>
+		<u-skeleton :loading="skeletonLoading" :animation="true" bgColor="#FFF"></u-skeleton>
 	</view>
 </template>
 
@@ -117,7 +118,13 @@
 				genderList: GENDER_LIST,
 				tryTimeList: period(),
 				payDayList: payday(),
+				skeletonLoading: true,
 			};
+		},
+		created() {
+			setTimeout(() => {
+				this.skeletonLoading = false;
+			}, 500)
 		},
 		methods: {
 			submit() {
@@ -215,10 +222,10 @@
 
 <style lang="scss">
 	.select-input {
-		width: 340upx;
+		width: 340rpx;
 	}
 	.container {
-		width: 750upx;
+		width: 750rpx;
 		height: auto;
 		display: flex;
 		flex-direction: column;
@@ -227,6 +234,7 @@
 		.logo {
 			height: 300rpx;
 			width: 300rpx;
+			margin-bottom: 10rpx;
 			image {
 				width: 100%;
 				height: 100%;
