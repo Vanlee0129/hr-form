@@ -92,13 +92,13 @@
 		</view>
 		<u-toast ref="uToast" />
 		<u-keyboard ref="uKeyboard" :mode="keyboardMode" v-model="keyboardShow" @change="valChange" @backspace="backspace" :mask="false" :dot-enabled="false" @confirm="confirmInput" :cancel-btn="false" :safe-area-inset-bottom="true"></u-keyboard>
-		<u-modal v-model="show" :content="content" @confirm="goSign" @cancel='cancel' :show-cancel-button="true"></u-modal>
+		<u-modal v-model="show" content="本人郑重承诺以上内容属实" @confirm="goSign" @cancel='show = false' :show-cancel-button="true"></u-modal>
 	</view>
 </template>
 
 <script>
 	import { period, isEmpty, payday } from '../../utils'
-	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR, BASE_URL } from '../../common'
+	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR, BASE_URL } from '../../common/constant'
 	export default {
 		data() {
 			return {
@@ -112,7 +112,6 @@
 				currentChoose: '',
 				readOnly: true,
 				show: false,
-				content: '本人郑重承诺以上内容属实',
 				border: true,
 				info: SIGN_INFO,
 				genderList: GENDER_LIST,
@@ -127,9 +126,6 @@
 					return
 				}
 				this.show = true
-			},
-			cancel() {
-				this.show = false
 			},
 			signature(data) {
 				uni.request({
