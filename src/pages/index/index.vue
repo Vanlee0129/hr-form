@@ -124,7 +124,7 @@
 		onLoad() {
 			uni.preloadPage({ url: '/pages/index/index' })
 			setTimeout(() => {
-				this.skeletonLoading = false;
+				this.skeletonLoading = false
 			}, 500)
 		},
 		methods: {
