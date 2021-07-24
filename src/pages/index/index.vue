@@ -121,8 +121,7 @@
 				skeletonLoading: true,
 			};
 		},
-		onLoad() {
-			uni.preloadPage({ url: '/pages/index/index' })
+		created() {
 			setTimeout(() => {
 				this.skeletonLoading = false
 			}, 500)
