@@ -1,7 +1,7 @@
 <template>
 	<view class="container u-skeleton">
 		<view class="logo">
-			<image src="/static/logo.png" mode="aspectFit" class="u-skeleton-rect"></image>
+			<image src="/static/logo.png" mode="aspectFit" class="u-skeleton-rect" alt="logo"></image>
 		</view>
 		<view class="main">
 			<view class="input-item">
