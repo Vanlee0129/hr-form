@@ -99,7 +99,7 @@
 
 <script>
 	import { period, isEmpty, payday } from '../../utils'
-	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR, BASE_URL } from '../../common/constant'
+	import { PHONE_ERROR, CARD_ERROR, SIGN_INFO, GENDER_LIST, INPUT_ERROR, REQUEST_ERROR, SYSTEM_ERROR, REQUEST_OPTIONS } from '../../common/constant'
 	export default {
 		data() {
 			return {
@@ -134,23 +134,19 @@
 				}
 				this.show = true
 			},
-			signature(data) {
-				uni.request({
-					url: BASE_URL,
-					method: 'POST',
-					data,
-					success: (res) => {
-						if (res?.data?.signUrl) window.location.href = res.data.signUrl
-						else if (!res?.data?.code) {
-							this.$refs.uToast.show(SYSTEM_ERROR)
-						}
-						uni.hideLoading()
-					},
-					fail: () => {
-						uni.hideLoading()
-						this.$refs.uToast.show(REQUEST_ERROR)
-					}
-				})
+			async signature(data) {
+				REQUEST_OPTIONS.data = data
+				const [error, result] = await uni.request(REQUEST_OPTIONS)
+				if (error) {
+					uni.hideLoading()
+					this.$refs.uToast.show(REQUEST_ERROR)
+					return
+				}
+				if (result?.data?.signUrl) window.location.href = result.data.signUrl
+				else if (!result?.data?.code) {
+					this.$refs.uToast.show(SYSTEM_ERROR)
+				}
+				uni.hideLoading()
 			},
 			goSign() {
 				uni.showLoading()
@@ -161,7 +157,7 @@
 			},
 			chooseAddress() {
 				uni.chooseLocation({
-					success: (res) => {
+					success: res => {
 						const { address } = res
 						this.info.workerAddress = address
 					}
