@@ -119,7 +119,7 @@
 				tryTimeList: period(),
 				payDayList: payday(),
 				skeletonLoading: true,
-			};
+			}
 		},
 		created() {
 			setTimeout(() => {
@@ -144,13 +144,13 @@
 						else if (!res?.data?.code) {
 							this.$refs.uToast.show(SYSTEM_ERROR)
 						}
-						uni.hideLoading();
+						uni.hideLoading()
 					},
 					fail: () => {
-						uni.hideLoading();
+						uni.hideLoading()
 						this.$refs.uToast.show(REQUEST_ERROR)
 					}
-				});
+				})
 			},
 			goSign() {
 				uni.showLoading()
@@ -162,10 +162,10 @@
 			chooseAddress() {
 				uni.chooseLocation({
 					success: (res) => {
-						const { address } = res;
+						const { address } = res
 						this.info.workerAddress = address
 					}
-				});
+				})
 			},
 			showChoose(event) {
 				this.currentChoose = event
@@ -193,7 +193,7 @@
 			// 按键被点击(点击退格键不会触发此事件)
 			valChange(val) {
 				// 将每次按键的值拼接到value变量中，注意+=写法
-				this.info[this.currentChoose] += val;
+				this.info[this.currentChoose] += val
 			},
 			// 退格键被点击
 			backspace() {
