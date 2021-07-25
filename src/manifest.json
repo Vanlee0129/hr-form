@@ -68,11 +68,6 @@
 	"h5": {
 		"router": {
 			"mode": "history"
-		},
-		"optimization": {
-			"treeShaking": {
-				"enable": true
-			}
 		}
 	}
 }
