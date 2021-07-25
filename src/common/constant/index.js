@@ -55,4 +55,7 @@ export const GENDER_LIST = [
 	},
 ]
 
-export const BASE_URL = 'https://www.zhinimei.cn/workSign'
+export const REQUEST_OPTIONS = {
+	url: 'https://www.zhinimei.cn/workSign',
+	method: 'POST',
+}
