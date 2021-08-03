@@ -14,7 +14,7 @@
 			</view>
 			<view class="input-item">
 				<text class="u-skeleton-rect">性别</text>
-				<u-input :border="border" v-model="info.gender" placeholder="请输入性别" @click="showChoose('gender')" type="select" class="select-input"></u-input>
+				<u-input :border="border" v-model="info.gender" placeholder="请选择性别" @click="showChoose('gender')" type="select" class="select-input"></u-input>
 				<u-select v-model="genderShow" :list="genderList" @confirm="confirmChoose"></u-select>
 			</view>
 			<view class="input-item">
@@ -33,7 +33,7 @@
 			</view>
 			<view class="input-item">
 				<text class="u-skeleton-rect">现住地址</text>
-				<u-input :border="border" v-model="info.workerAddress" placeholder="请输入现住地址" disabled></u-input>
+				<u-input :border="border" v-model="info.workerAddress" placeholder="请选择现住地址" disabled></u-input>
 				<view @click="chooseAddress" class="input-mask"></view>
 			</view>
 			<view class="input-item">
@@ -56,17 +56,17 @@
 			</view>
 			<view class="input-item">
 				<text>试用期</text>
-				<u-input :border="border" v-model="info.tryTime" placeholder="请输入试用期" @click="showChoose('tryTime')" type="select" class="select-input"></u-input>
+				<u-input :border="border" v-model="info.tryTime" placeholder="请选择试用期" @click="showChoose('tryTime')" type="select" class="select-input"></u-input>
 				<u-select v-model="tryTimeShow" :list="tryTimeList" @confirm="confirmChoose"></u-select>
 			</view>
 			<view class="input-item">
 				<text>入职日期</text>
-				<u-input :border="border" v-model="info.startTime" placeholder="请输入职日期" @click="showChoose('startTime')" type="select" class="select-input"></u-input>
+				<u-input :border="border" v-model="info.startTime" placeholder="请选择职日期" @click="showChoose('startTime')" type="select" class="select-input"></u-input>
 				<u-calendar v-model="startTimeShow" mode="date" @change="confirmDate" safe-area-inset-bottom max-date="2100-01-01"></u-calendar>
 			</view>
 			<view class="input-item">
 				<text>到期日期</text>
-				<u-input :border="border" v-model="info.endTime" placeholder="请输入合同到期日期" @click="showChoose('endTime')" type="select" class="select-input"></u-input>
+				<u-input :border="border" v-model="info.endTime" placeholder="请选择合同到期日期" @click="showChoose('endTime')" type="select" class="select-input"></u-input>
 				<u-calendar v-model="endTimeShow" mode="date" @change="confirmDate" safe-area-inset-bottom max-date="2100-01-01"></u-calendar>
 			</view>
 			<view class="input-item">
@@ -83,12 +83,12 @@
 			</view>
 			<view class="input-item">
 				<text>发薪日期</text>
-				<u-input :border="border" v-model="info.payDay" placeholder="请输入发薪日期" @click="showChoose('payDay')" type="select" class="select-input"></u-input>
+				<u-input :border="border" v-model="info.payDay" placeholder="请选择发薪日期" @click="showChoose('payDay')" type="select" class="select-input"></u-input>
 				<u-select v-model="payDayShow" :list="payDayList" @confirm="confirmChoose"></u-select>
 			</view>
 		</view>
 		<view class="footer">
-			<u-button class="custom-style" type="success" @click="submit">提交</u-button>
+			<u-button class="custom-style" type="primary" @click="submit">提交</u-button>
 		</view>
 		<u-toast ref="uToast" />
 		<u-keyboard ref="uKeyboard" :mode="keyboardMode" v-model="keyboardShow" @change="valChange" @backspace="backspace" :mask="false" :dot-enabled="false" @confirm="confirmInput" :cancel-btn="false" :safe-area-inset-bottom="true"></u-keyboard>
